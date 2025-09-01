@@ -1,3 +1,4 @@
+![personal](https://github.com/ekkarat74/UnityDeveloper/blob/main/1706705920152.jpg)
 # 👋 Hi, I'm Ekkarat thaitisa
 💻 Game Programmer | 🎮 Unity Developer
 
