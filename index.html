@@ -7,23 +7,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="loader">
+    <div class="spaceship">🚀</div>
+    <p>Loading...</p>
+  </div>
 
-  <!-- Header -->
-  <header>
-    <div class="header-content">
-      <img src="https://github.com/ekkarat74/UnityDeveloper/blob/main/1706705920152.jpg?raw=true" alt="personal" class="profile-img">
-      <h1>👋 Hi, I'm <span>Ekkarat Thaitisa</span></h1>
-      <p>💻 Game Programmer | 🎮 Unity Developer</p>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-    <!-- 🌙 Toggle Button -->
-    <button id="themeToggle">🌙</button>
-  </header>
+<!-- Header -->
+<header id="mainHeader">
+  <canvas id="heroParticles"></canvas> <!-- 🌌 Particle Effect -->
+  <div class="header-content">
+    <img src="https://github.com/ekkarat74/UnityDeveloper/blob/main/1706705920152.jpg?raw=true" alt="personal" class="profile-img">
+    <h1>👋 Hi, I'm <span>Ekkarat Thaitisa</span></h1>
+    <h2 class="typing-text"></h2>
+    <a href="CV.pdf" download class="btn-cv">📄 Download CV</a>
+    <p>💻 Game Programmer | 🎮 Unity Developer</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <button id="themeToggle">🌙</button>
+</header>
 
   <!-- About Section -->
   <section id="about" class="card">
@@ -81,7 +89,7 @@
       <p class="description">
         This game is based on the subject I am studying, with Genre : Action - Adventure and Design : Lost Civilzationas the main subjects.
       </p>
-      <a href="https://github.com/Ekkarat02-lab/Rapid_Game_Action_Adventure.git" target="_blank">View githubt</a>
+      <a href="https://github.com/Ekkarat02-lab/Rapid_Game_Action_Adventure.git" target="_blank">View github</a>
     </div>
 
     <div class="project-card">
@@ -111,22 +119,116 @@
 </section>
 
 
-  <!-- Skills Section -->
-  <section id="skills" class="card">
-    <h2>🔹 Skills</h2>
-    <ul>
-      <li><b>Languages</b>: C#, SQL</li>
-      <li><b>Engines</b>: Unity</li>
-      <li><b>Other</b>: Level Design, Databases</li>
-    </ul>
-  </section>
+<!-- Skills Section -->
+<section id="skills" class="card">
+  <h2>🔹 Skills</h2>
+  <div class="skills-grid">
+    
+    <div class="skill-card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="50"/>
+      <h3>C#</h3>
+      <p>Strong in OOP, gameplay mechanics, tools, and systems programming</p>
+    </div>
+
+    <div class="skill-card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" width="50"/>
+      <h3>Unity</h3>
+      <p>Experienced in AI, physics, UI/UX, and mobile/PC optimization</p>
+    </div>
+
+    <div class="skill-card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="50"/>
+      <h3>Git & GitHub</h3>
+      <p>Version control, collaborative workflows, and project management</p>
+    </div>
+
+    <div class="skill-card">
+      <h3>SQL & Databases</h3>
+      <p>Game data management, analytics, and structured queries</p>
+    </div>
+
+    <div class="skill-card">
+      <h3>Level Design</h3>
+      <p>Designing engaging levels with balance and pacing in mind</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Education Section -->
+<section id="education" class="card">
+  <h2>🔹 Education</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Bangkok University</h3>
+        <p><b>Degree:</b> Bachelor’s Degree in Information Technology and Innovation</p>
+        <p><b>Major:</b> Game and Interactive Media</p>
+        <p><i>2022 - 2024</i></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Tangtrongchit Business Administration Technological College</h3>
+        <p><b>Degree:</b> Advanced Vocational Certificate in Digital Business Technology</p>
+        <p><i>2020 - 2021</i></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Tangtrongchit Commercial Technological College</h3>
+        <p><b>Certificate:</b> Vocational Certificate in Business Computer</p>
+        <p><i>2017 - 2019</i></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Experience Section -->
+<section id="experience" class="card">
+  <h2>🔹 Experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>WolvEden Production Co., Ltd.</h3>
+        <p><b>Role:</b> Unity Developer</p>
+        <p><i>19 May - 15 August 2025</i></p>
+        <ul>
+          <li>Developed AI Controller for Boss and MiniBoss</li>
+          <li>Implemented Monster AI Controller with FSM</li>
+          <li>Designed and integrated Input System Controller for Main Character</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Phymon and Friend – Senior Project</h3>
+        <p><b>Role:</b> Game Programmer - Level Designer</p>
+        <p><i>August - December 2024</i></p>
+        <ul>
+          <li>Developed an Android game using Unity and C#</li>
+          <li>Designed child-friendly UI/UX for players aged 4–9</li>
+          <li>Conducted user testing with children and improved gameplay based on feedback</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- Contact Section -->
   <section id="contact" class="card">
     <h2>🔹 Contact</h2>
     <p>📱 <b>Phone</b>: +66 64-797-5947</p>
     <p>📧 <b>Email</b>: <a href="mailto:ekkarat.thaitisa@gmail.com">ekkarat.thaitisa@gmail.com</a></p>
-    <p>🌐 <b>LinkedIn</b>: <a href="https://linkedin.com/in/ekkarat-thaitisa-unitydeveloment" target="_blank">linkedin.com/in/ekkarat-thaitisa-unitydeveloment</a></p>
+    <p>🌐 <b>LinkedIn</b>: <a href="https://linkedin.com/in/ekkarat-thaitisa-unitydevelopment" target="_blank">linkedin.com/in/ekkarat-thaitisa-unitydevelopment</a></p>
   </section>
 
   <!-- Back to Top Button -->
