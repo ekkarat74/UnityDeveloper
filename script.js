@@ -157,3 +157,11 @@ window.addEventListener("resize", () => {
   canvas.height = document.getElementById("mainHeader").offsetHeight;
   initParticles();
 });
+
+// Progress Bar เวลา Scroll
+window.addEventListener("scroll", () => {
+  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  let progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
+});
