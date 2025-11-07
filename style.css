@@ -531,3 +531,17 @@ footer {
   z-index: 9999;
   transition: width 0.25s;
 }
+/* 📚 Education & Experience Grid Layout */
+.edu-exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+@media (max-width: 900px) {
+  .edu-exp-grid {
+    grid-template-columns: 1fr; /* ซ้อนแนวตั้งเมื่อจอเล็ก */
+  }
+}
