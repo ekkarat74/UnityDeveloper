@@ -74,7 +74,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.2 });
 
-document.querySelectorAll("section, .card, .project-card").forEach(el => observer.observe(el));
+document.querySelectorAll("section, .card, .project-card, .skill-category-card").forEach(el => observer.observe(el));
 
 // Sticky Navbar + Active Link Highlight
 const sections = document.querySelectorAll("section");

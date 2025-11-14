@@ -368,22 +368,85 @@ section {
   list-style-type: disc;
 }
 
-/* Skills Grid */
-.skills-grid {
+/* ‼️ ลบ .skills-grid และ .skill-card ของเก่าออกก่อนนะครับ ‼️ */
+
+/* 👇 แล้วเพิ่มโค้ดชุดใหม่นี้เข้าไปแทน */
+
+/* Main grid for skill categories */
+.skill-categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* พยายามสร้าง 2 คอลัมน์ แต่ถ้าจอเล็กจะเหลือ 1 */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
 
-.skill-card {
+/* The card for each category (e.g., "Programming Languages") */
+.skill-category-card {
   background: var(--card-bg);
-  padding: 1.5rem;
   border-radius: 12px;
-  text-align: center;
+  padding: 1.5rem 2rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.3s ease;
+  
+  /* เพิ่มส่วนนี้เพื่อให้การ์ด fade-in */
+  opacity: 0;
+  transform: translateY(20px);
 }
+
+/* เพิ่ม .show สำหรับ animation */
+.skill-category-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.skill-category-card h3 {
+  color: var(--accent); /* ใช้ accent color ของคุณ */
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3); /* เส้นคั่นบางๆ */
+}
+
+/* Grid for the items inside each category */
+.skill-items-grid {
+  display: grid;
+  /* 2 คอลัมน์สำหรับ skill items */
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+  gap: 1rem;
+}
+
+/* Each individual skill item (e.g., "C#") */
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* ใช้สีพื้นหลังของ body เพื่อให้ตัดกับสี card */
+  background: var(--bg-color); 
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+  color: var(--text-color); /* เพิ่มสี text */
+}
+
+.skill-item:hover {
+  background: var(--accent);
+  color: #1e1e2f; /* สีเข้มสำหรับ text */
+  transform: scale(1.05);
+}
+
+.skill-item img {
+  width: 25px;
+  height: 25px;
+}
+/* 👆 สิ้นสุดโค้ดที่เพิ่มใหม่ */
 
 .skill-card:hover {
   transform: translateY(-5px);
