@@ -1,167 +1,152 @@
-// Back to Top
-const backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-  backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-});
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// 🌙 Dark Mode Toggle
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-
-if (localStorage.getItem('theme') === 'dark') {
-  body.classList.add('dark');
-  themeToggle.textContent = '☀️';
-}
-
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  
-  if (body.classList.contains('dark')) {
-    themeToggle.textContent = '☀️';
-    localStorage.setItem('theme', 'dark');
-  } else {
-    themeToggle.textContent = '🌙';
-    localStorage.setItem('theme', 'light');
-  }
-});
-
-// Typing Effect
-const roles = ["Game Programmer", "Unity Developer"];
-let roleIndex = 0;
-let charIndex = 0;
-const typingElement = document.querySelector(".typing-text");
-
-function type() {
-  if (charIndex < roles[roleIndex].length) {
-    typingElement.textContent += roles[roleIndex].charAt(charIndex);
-    charIndex++;
-    setTimeout(type, 100);
-  } else {
-    setTimeout(erase, 1500);
-  }
-}
-
-function erase() {
-  if (charIndex > 0) {
-    typingElement.textContent = roles[roleIndex].substring(0, charIndex - 1);
-    charIndex--;
-    setTimeout(erase, 50);
-  } else {
-    roleIndex = (roleIndex + 1) % roles.length;
-    setTimeout(type, 300);
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  if (roles.length) setTimeout(type, 500);
-});
+    
+    // 🚀 1. Loader System
+    const loader = document.getElementById("loader");
+    setTimeout(() => {
+        loader.classList.add("hidden");
+    }, 1500);
 
-// 🚀 Loader
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  setTimeout(() => loader.classList.add("hidden"), 800);
-});
+    // 🌌 2. Particle System (Fixed Dark Mode Colors)
+    const canvas = document.getElementById("heroParticles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
 
-// Smooth Scroll Animation
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = document.getElementById("home").offsetHeight;
     }
-  });
-}, { threshold: 0.2 });
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-document.querySelectorAll("section, .card, .project-card, .skill-category-card").forEach(el => observer.observe(el));
-
-// Sticky Navbar + Active Link Highlight
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("header nav a");
-
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(sec => {
-    const secTop = sec.offsetTop - 100;
-    if (pageYOffset >= secTop) current = sec.getAttribute("id");
-  });
-
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href").includes(current)) {
-      link.classList.add("active");
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.5 + 0.1;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x < 0) this.x = canvas.width;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.y < 0) this.y = canvas.height;
+            if (this.y > canvas.height) this.y = 0;
+        }
+        draw() {
+            // ใช้สีธีมมืดถาวร (Indigo)
+            ctx.fillStyle = `rgba(129, 140, 248, ${this.opacity})`;
+            
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-  });
-});
 
-// 🌌 Particle Effect for Hero Section
-const canvas = document.getElementById("heroParticles");
-const ctx = canvas.getContext("2d");
+    function initParticles() {
+        particles = [];
+        const particleCount = window.innerWidth < 768 ? 30 : 60;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
 
-canvas.width = window.innerWidth;
-canvas.height = document.getElementById("mainHeader").offsetHeight;
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+    }
 
-let particles = [];
-const neonColors = ["#00f5ff", "#ff00ff", "#ff007f"];
+    initParticles();
+    animateParticles();
 
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = (Math.random() - 0.5) * 0.5;
-    this.speedY = (Math.random() - 0.5) * 0.5;
-    this.color = neonColors[Math.floor(Math.random() * neonColors.length)];
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
+    // ⌨️ 3. Typing Effect
+    const roles = ["Game Programmer", "Unity Developer", "Java Enthusiast"];
+    const typingText = document.querySelector(".typing-text");
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-  }
-  draw() {
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = this.color;
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  }
-}
+    function type() {
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+            typingText.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingText.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+        }
 
-function initParticles() {
-  particles = [];
-  for (let i = 0; i < 80; i++) {
-    particles.push(new Particle());
-  }
-}
+        let speed = isDeleting ? 50 : 100;
 
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  requestAnimationFrame(animateParticles);
-}
+        if (!isDeleting && charIndex === currentRole.length) {
+            speed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            speed = 500;
+        }
 
-initParticles();
-animateParticles();
+        setTimeout(type, speed);
+    }
+    type();
 
-// Resize canvas if window size changes
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = document.getElementById("mainHeader").offsetHeight;
-  initParticles();
-});
+    // 📜 4. Scroll Spy & Animations
+    const sections = document.querySelectorAll("section, header");
+    const navLinks = document.querySelectorAll("#navbar a");
+    const faders = document.querySelectorAll(".fade-in");
+    const backToTop = document.getElementById("backToTop");
+    const progressBar = document.getElementById("progressBar");
 
-// Progress Bar เวลา Scroll
-window.addEventListener("scroll", () => {
-  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  let progress = (scrollTop / scrollHeight) * 100;
-  document.getElementById("progressBar").style.width = progress + "%";
+    const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    window.addEventListener("scroll", () => {
+        let scrollTop = window.scrollY;
+        let docHeight = document.body.offsetHeight - window.innerHeight;
+        let scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + "%";
+
+        if (scrollTop > 500) backToTop.style.display = "block";
+        else backToTop.style.display = "none";
+
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 200) {
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active");
+            }
+        });
+    });
+
+    backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
 });
