@@ -1,10 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // 🚀 1. Loader System
-    const loader = document.getElementById("loader");
-    setTimeout(() => {
-        loader.classList.add("hidden");
-    }, 1500);
 
     // 🌌 2. Particle System (Fixed Dark Mode Colors)
     const canvas = document.getElementById("heroParticles");
